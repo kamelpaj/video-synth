@@ -89,6 +89,16 @@ void ofApp::exit() {
 void ofApp::keyPressed(int key){
     if (key == 'z') showGui = !showGui;
     if (key == OF_KEY_RETURN) ofSaveScreen("screenshot.png");
+    if (key == 's') {
+        ofFileDialogResult res;
+        res = ofSystemSaveDialog("preset.xml", "Saving Preset");
+        if (res.bSuccess) gui.saveToFile(res.filePath);
+    }
+    if (key == 'l') {
+        ofFileDialogResult res;
+        res = ofSystemLoadDialog("Loading Preset");
+        if (res.bSuccess) gui.loadFromFile(res.filePath);
+    }
 }
 
 //--------------------------------------------------------------
