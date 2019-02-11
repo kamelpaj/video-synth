@@ -27,6 +27,8 @@ class ofApp : public ofBaseApp{
         ofxIntSlider countX;
         ofxFloatSlider stepX;
         ofxFloatSlider twistX;
+    
+        bool showGui;
 
 		void keyPressed(int key);
 		void keyReleased(int key);

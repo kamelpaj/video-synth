@@ -7,6 +7,8 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofBackground(ofColor::white);
     
+    showGui = true;
+    
     gui.setup( "Parameters", "settings.xml" );
     gui.add( countX.setup( "countX", 50, 0, 200) );
     gui.add( stepX.setup( "stepX", 20, 0, 200 ) );
@@ -65,7 +67,9 @@ void ofApp::stripePattern() {
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(Background);
-    gui.draw();
+    
+    if (showGui) gui.draw();
+    
     ofPushMatrix();
     ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
     float Scl = pow(Scale, 4.0f);
@@ -83,7 +87,8 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == 'z') showGui = !showGui;
+    if (key == OF_KEY_RETURN) ofSaveScreen("screenshot.png");
 }
 
 //--------------------------------------------------------------
