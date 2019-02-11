@@ -42,6 +42,15 @@ void ofApp::setup(){
     primGroup.add(type.setup("type", false));
     gui.add(&primGroup);
     
+    mixerGroup.setup("Mixer");
+    mixerGroup.setHeaderBackgroundColor(ofColor::darkRed);
+    mixerGroup.setBorderColor(ofColor::darkRed);
+    mixerGroup.add(imageAlpha.setup("image", 100, 0, 255));
+    mixerGroup.add(videoAlpha.setup("video", 200, 0, 255));
+    mixerGroup.add(cameraAlpha.setup("camera", 100, 0, 255));
+    gui.add(&mixerGroup);
+    
+    gui.minimizeAll();
     gui.loadFromFile("settings.xml");
     
     ofLoadImage(image, "collage.png");
@@ -97,15 +106,22 @@ void ofApp::stripePattern() {
 void ofApp::draw(){
     ofBackground(Background);
     
-    ofSetColor(255);
-    image.draw(0, 0, ofGetWidth(), ofGetHeight());
-    ofSetColor(255);
-    video.draw(0, 0, ofGetWidth(), ofGetHeight());
+    // Enable additive blending mode
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
     
+    // Image draw
+    ofSetColor(255, imageAlpha);
+    image.draw(0, 0, ofGetWidth(), ofGetHeight());
+    // Video draw
+    ofSetColor(255, videoAlpha);
+    video.draw(0, 0, ofGetWidth(), ofGetHeight());
+    // Camera draw
     if (camera.isInitialized()) {
-        ofSetColor(255);
+        ofSetColor(255, cameraAlpha);
         camera.draw(0, 0, ofGetHeight(), ofGetHeight());
     }
+    // Back to Alpha blending =)
+    ofEnableAlphaBlending();
     
     if (showGui) gui.draw();
     

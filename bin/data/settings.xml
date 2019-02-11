@@ -6,7 +6,7 @@
 	<Global>
 		<Scale>0.867347</Scale>
 		<Rotate>-139.592</Rotate>
-		<Background>24.7194</Background>
+		<Background>0</Background>
 	</Global>
 	<Primitive>
 		<shiftY>20.4081</shiftY>
@@ -20,4 +20,9 @@
 	<stepY>95</stepY>
 	<twistY>-6.9</twistY>
 	<pinchY>0.575</pinchY>
+	<Mixer>
+		<image>118.393</image>
+		<video>54.6429</video>
+		<camera>255</camera>
+	</Mixer>
 </Parameters>

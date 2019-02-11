@@ -12,6 +12,11 @@ class ofApp : public ofBaseApp{
         void exit();
         void stripePattern();
     
+        ofxPanel gui;
+        ofxIntSlider countX;
+        ofxFloatSlider stepX;
+        ofxFloatSlider twistX;
+    
         ofxGuiGroup primGroup;
         ofxFloatSlider shiftY, rotate;
         ofxVec2Slider size;
@@ -23,10 +28,8 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider Rotate;
         ofxFloatSlider Background;
     
-        ofxPanel gui;
-        ofxIntSlider countX;
-        ofxFloatSlider stepX;
-        ofxFloatSlider twistX;
+        ofxGuiGroup mixerGroup;
+        ofxFloatSlider imageAlpha, videoAlpha, cameraAlpha;
     
         bool showGui;
     
