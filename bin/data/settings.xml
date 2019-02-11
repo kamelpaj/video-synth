@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Parameters>
+	<countX>25</countX>
+	<stepX>113</stepX>
+	<twistX>-22.05</twistX>
+	<Global>
+		<Scale>0.612245</Scale>
+		<Rotate>156.122</Rotate>
+		<Background>57.2449</Background>
+	</Global>
+	<Primitive>
+		<shiftY>-418.367</shiftY>
+		<rotate>-112.041</rotate>
+		<size>0.216577, 13.6485</size>
+		<color>126, 113, 184, 255</color>
+		<filled>1</filled>
+		<type>0</type>
+	</Primitive>
+</Parameters>
