@@ -36,6 +36,7 @@ class ofApp : public ofBaseApp{
     
         ofTexture image;
         ofVideoPlayer video;
+        ofVideoGrabber camera;
 
 		void keyPressed(int key);
 		void keyReleased(int key);

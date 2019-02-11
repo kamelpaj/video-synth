@@ -52,6 +52,8 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     video.update();
+    
+    if (camera.isInitialized()) camera.update();
 }
 
 //--------------------------------------------------------------
@@ -100,6 +102,11 @@ void ofApp::draw(){
     ofSetColor(255);
     video.draw(0, 0, ofGetWidth(), ofGetHeight());
     
+    if (camera.isInitialized()) {
+        ofSetColor(255);
+        camera.draw(0, 0, ofGetHeight(), ofGetHeight());
+    }
+    
     if (showGui) gui.draw();
     
     ofPushMatrix();
@@ -126,10 +133,17 @@ void ofApp::keyPressed(int key){
         res = ofSystemSaveDialog("preset.xml", "Saving Preset");
         if (res.bSuccess) gui.saveToFile(res.filePath);
     }
+    
     if (key == 'l') {
         ofFileDialogResult res;
         res = ofSystemLoadDialog("Loading Preset");
         if (res.bSuccess) gui.loadFromFile(res.filePath);
+    }
+    
+    if (key == 'c') {
+        camera.setDeviceID(0);
+        camera.setDesiredFrameRate(30);
+        camera.initGrabber(1280, 720);
     }
 }
 
