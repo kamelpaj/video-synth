@@ -43,11 +43,15 @@ void ofApp::setup(){
     gui.add(&primGroup);
     
     gui.loadFromFile("settings.xml");
+    
+    ofLoadImage(image, "collage.png");
+    video.load("flowing.mp4");
+    video.play();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    video.update();
 }
 
 //--------------------------------------------------------------
@@ -90,6 +94,11 @@ void ofApp::stripePattern() {
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(Background);
+    
+    ofSetColor(255);
+    image.draw(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(255);
+    video.draw(0, 0, ofGetWidth(), ofGetHeight());
     
     if (showGui) gui.draw();
     

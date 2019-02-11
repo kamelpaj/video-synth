@@ -33,6 +33,9 @@ class ofApp : public ofBaseApp{
         ofxIntSlider countY;
         ofxFloatSlider stepY, twistY, pinchY;
         void matrixPattern();
+    
+        ofTexture image;
+        ofVideoPlayer video;
 
 		void keyPressed(int key);
 		void keyReleased(int key);
