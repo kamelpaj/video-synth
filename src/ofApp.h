@@ -29,6 +29,10 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider twistX;
     
         bool showGui;
+    
+        ofxIntSlider countY;
+        ofxFloatSlider stepY, twistY, pinchY;
+        void matrixPattern();
 
 		void keyPressed(int key);
 		void keyReleased(int key);

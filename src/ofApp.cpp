@@ -14,6 +14,11 @@ void ofApp::setup(){
     gui.add( stepX.setup( "stepX", 20, 0, 200 ) );
     gui.add( twistX.setup( "twistX", 5, -45, 45 ) );
     
+    gui.add(countY.setup("countY", 0, 0, 50));
+    gui.add(stepY.setup("stepY", 20, 0, 200));
+    gui.add(twistY.setup("twistY", 0, -30, 30));
+    gui.add(pinchY.setup("pinchY", 0, 0, 1));
+    
     globalGroup.setup("Global");
     globalGroup.add(Scale.setup("Scale", 1, 0.0, 1));
     globalGroup.add(Rotate.setup("Rotate", 0, -180, 180));
@@ -46,6 +51,23 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
+void ofApp::matrixPattern() {
+    for (int y=-countY; y<=countY; y++) {
+        ofPushMatrix();
+        //----------------
+        if (countY > 0) {
+            float scl = ofMap(y, -countY, countY, 1-pinchY, 1);
+            ofScale(scl, scl);
+        }
+        ofTranslate(0, y * stepY);
+        ofRotateDeg(y * twistY);
+        stripePattern();
+        //----------------
+        ofPopMatrix();
+    }
+}
+
+//--------------------------------------------------------------
 void ofApp::stripePattern() {
     ofSetColor(color);
     ofSetLineWidth(1);
@@ -58,8 +80,9 @@ void ofApp::stripePattern() {
         ofTranslate(0, shiftY);
         ofRotateDeg(rotate);
         ofScale(size->x, size->y);
-        if (type) ofRectangle(-50, -50, 100, 100);
+        if (type) ofDrawRectangle(-50, -50, 100, 100);
         else ofDrawTriangle(0, 0, -50, 100, 50, 100);
+        
         ofPopMatrix();
     }
 }
@@ -74,8 +97,8 @@ void ofApp::draw(){
     ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
     float Scl = pow(Scale, 4.0f);
     ofScale(Scl, Scl);
-    ofRotate(Rotate);
-    stripePattern();
+    ofRotateDeg(Rotate);
+    matrixPattern();
     
     ofPopMatrix();
 }

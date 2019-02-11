@@ -1,19 +1,23 @@
 <?xml version="1.0"?>
 <Parameters>
-	<countX>29</countX>
-	<stepX>12</stepX>
-	<twistX>-26.55</twistX>
+	<countX>78</countX>
+	<stepX>16</stepX>
+	<twistX>2.7</twistX>
 	<Global>
-		<Scale>0.729592</Scale>
-		<Rotate>-134.082</Rotate>
-		<Background>3.90306</Background>
+		<Scale>0.867347</Scale>
+		<Rotate>-139.592</Rotate>
+		<Background>24.7194</Background>
 	</Global>
 	<Primitive>
-		<shiftY>-408.163</shiftY>
-		<rotate>-9.18367</rotate>
-		<size>13.6485, 8.23407</size>
-		<color>146, 131, 214, 62</color>
-		<filled>0</filled>
-		<type>0</type>
+		<shiftY>20.4081</shiftY>
+		<rotate>-119.388</rotate>
+		<size>2.71554, 0.00833005</size>
+		<color>96, 42, 154, 102</color>
+		<filled>1</filled>
+		<type>1</type>
 	</Primitive>
+	<countY>8</countY>
+	<stepY>95</stepY>
+	<twistY>-6.9</twistY>
+	<pinchY>0.575</pinchY>
 </Parameters>
