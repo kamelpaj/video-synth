@@ -2,14 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    // General project setup. Title, resolution, framerate and background.
     ofSetWindowTitle("Video synth");
     ofSetWindowShape(1280, 720);
     ofSetFrameRate(60);
     ofBackground(ofColor::white);
     
+    // General GUI setup. Load settings and auto-show GUI.
     showGui = true;
-    
     gui.setup( "Parameters", "settings.xml" );
+    
+    // GUI for controlling actual drawing of vector graphic.
     gui.add( countX.setup( "countX", 50, 0, 200) );
     gui.add( stepX.setup( "stepX", 20, 0, 200 ) );
     gui.add( twistX.setup( "twistX", 5, -45, 45 ) );
@@ -19,12 +22,14 @@ void ofApp::setup(){
     gui.add(twistY.setup("twistY", 0, -30, 30));
     gui.add(pinchY.setup("pinchY", 0, 0, 1));
     
+    // Global GUI. Controls scale, rotation and background of vector drawing.
     globalGroup.setup("Global");
     globalGroup.add(Scale.setup("Scale", 1, 0.0, 1));
     globalGroup.add(Rotate.setup("Rotate", 0, -180, 180));
     globalGroup.add(Background.setup("Background", 255, 0, 255));
     gui.add(&globalGroup);
     
+    // Primitive GUI. Controls shiftY, rotation, size, color, isFilled and type of vector drawing.
     primGroup.setup("Primitive");
     primGroup.add(shiftY.setup("shiftY", 0.0, -1000.0, 1000.0));
     primGroup.add(rotate.setup("rotate", 0.0, -180, 180));
@@ -42,6 +47,7 @@ void ofApp::setup(){
     primGroup.add(type.setup("type", false));
     gui.add(&primGroup);
     
+    // Mixer GUI. Can set alpha level to image, video and camera.
     mixerGroup.setup("Mixer");
     mixerGroup.setHeaderBackgroundColor(ofColor::darkRed);
     mixerGroup.setBorderColor(ofColor::darkRed);
@@ -56,6 +62,9 @@ void ofApp::setup(){
     ofLoadImage(image, "collage.png");
     video.load("flowing.mp4");
     video.play();
+    
+    // Frame Buffer Object initialaztion.
+    fbo.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
 }
 
 //--------------------------------------------------------------
@@ -69,7 +78,7 @@ void ofApp::update(){
 void ofApp::matrixPattern() {
     for (int y=-countY; y<=countY; y++) {
         ofPushMatrix();
-        //----------------
+        // ----------------
         if (countY > 0) {
             float scl = ofMap(y, -countY, countY, 1-pinchY, 1);
             ofScale(scl, scl);
@@ -77,7 +86,7 @@ void ofApp::matrixPattern() {
         ofTranslate(0, y * stepY);
         ofRotateDeg(y * twistY);
         stripePattern();
-        //----------------
+        // ----------------
         ofPopMatrix();
     }
 }
@@ -101,13 +110,26 @@ void ofApp::stripePattern() {
         ofPopMatrix();
     }
 }
+//--------------------------------------------------------------
+void ofApp::draw() {
+    
+    fbo.begin();
+    draw2d();
+    fbo.end();
+    ofSetColor( 255 );
+    fbo.draw( 0, 0, ofGetWidth(), ofGetHeight() );
+    
+    // GUI toggle. Bound to z-key
+    if (showGui) gui.draw();
+}
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw2d(){
     ofBackground(Background);
     
-    // Enable additive blending mode
+    // Enable additive blending mode and disable smoothing.
     ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofDisableSmoothing();
     
     // Image draw
     ofSetColor(255, imageAlpha);
@@ -120,10 +142,11 @@ void ofApp::draw(){
         ofSetColor(255, cameraAlpha);
         camera.draw(0, 0, ofGetHeight(), ofGetHeight());
     }
-    // Back to Alpha blending =)
+    // Switch to Alpha blending (from additive) and enable smoothing.
     ofEnableAlphaBlending();
+    ofEnableSmoothing();
     
-    if (showGui) gui.draw();
+
     
     ofPushMatrix();
     ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
