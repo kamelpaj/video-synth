@@ -56,6 +56,13 @@ void ofApp::setup(){
     mixerGroup.add(cameraAlpha.setup("camera", 100, 0, 255));
     gui.add(&mixerGroup);
     
+    shader.load( "kaleido" );
+    mixerGroup.add( kenabled.setup( "kenabled", true ) );
+    mixerGroup.add( ksectors.setup( "ksectors", 10, 1, 100 ) );
+    mixerGroup.add( kangle.setup( "kangle", 0, -180, 180 ) );
+    mixerGroup.add( kx.setup( "kx", 0.5, 0, 1 ) );
+    mixerGroup.add( ky.setup( "ky", 0.5, 0, 1 ) );
+    
     gui.minimizeAll();
     gui.loadFromFile("settings.xml");
     
@@ -117,7 +124,21 @@ void ofApp::draw() {
     draw2d();
     fbo.end();
     ofSetColor( 255 );
+    
+    // Draw shader.
+    if ( kenabled ) {
+        shader.begin();
+        shader.setUniform1i( "ksectors", ksectors );
+        shader.setUniform1f( "kangleRad", ofDegToRad(kangle) );
+        shader.setUniform2f( "kcenter", kx*ofGetWidth(),
+                            ky*ofGetHeight() );
+        shader.setUniform2f( "screenCenter", 0.5*ofGetWidth(),
+                            0.5*ofGetHeight() );
+    }
+    
     fbo.draw( 0, 0, ofGetWidth(), ofGetHeight() );
+    
+    if ( kenabled ) shader.end();
     
     // GUI toggle. Bound to z-key
     if (showGui) gui.draw();
@@ -142,7 +163,7 @@ void ofApp::draw2d(){
         ofSetColor(255, cameraAlpha);
         camera.draw(0, 0, ofGetHeight(), ofGetHeight());
     }
-    // Switch to Alpha blending (from additive) and enable smoothing.
+    // Switch to Alpha blending  (from additive) and enable smoothing.
     ofEnableAlphaBlending();
     ofEnableSmoothing();
     

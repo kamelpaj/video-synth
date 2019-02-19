@@ -43,6 +43,11 @@ class ofApp : public ofBaseApp{
         ofVideoGrabber camera;
     
         ofFbo fbo;
+    
+        ofShader shader;
+        ofxToggle kenabled;
+        ofxIntSlider ksectors;
+        ofxFloatSlider kangle, kx, ky;
 
 		void keyPressed(int key);
 		void keyReleased(int key);
