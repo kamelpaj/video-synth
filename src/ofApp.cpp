@@ -72,6 +72,10 @@ void ofApp::setup(){
     
     // Frame Buffer Object initialaztion.
     fbo.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
+    
+    // Sphere
+    sphere.set(250, 20);
+    sphere.setGlobalPosition( ofGetWidth()/2, ofGetHeight()/2, 0 );
 }
 
 //--------------------------------------------------------------
@@ -140,6 +144,8 @@ void ofApp::draw() {
     
     if ( kenabled ) shader.end();
     
+    draw3d();
+    
     // GUI toggle. Bound to z-key
     if (showGui) gui.draw();
 }
@@ -177,6 +183,14 @@ void ofApp::draw2d(){
     matrixPattern();
     
     ofPopMatrix();
+}
+
+//--------------------------------------------------------------
+void ofApp::draw3d() {
+    cam.begin();
+    ofSetColor( ofColor::white );
+    sphere.drawWireframe();
+    cam.end();
 }
 
 //--------------------------------------------------------------

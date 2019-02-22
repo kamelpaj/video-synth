@@ -10,6 +10,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
         void draw2d();
+        void draw3d();
         void exit();
         void stripePattern();
     
@@ -48,6 +49,10 @@ class ofApp : public ofBaseApp{
         ofxToggle kenabled;
         ofxIntSlider ksectors;
         ofxFloatSlider kangle, kx, ky;
+    
+        ofSpherePrimitive sphere;
+    
+        ofEasyCam cam;
 
 		void keyPressed(int key);
 		void keyReleased(int key);

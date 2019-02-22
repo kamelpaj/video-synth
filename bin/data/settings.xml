@@ -23,8 +23,8 @@
 	<Mixer>
 		<image>0</image>
 		<video>0</video>
-		<camera>0</camera>
-		<kenabled>1</kenabled>
+		<camera>106.684</camera>
+		<kenabled>0</kenabled>
 		<ksectors>7</ksectors>
 		<kangle>-126.735</kangle>
 		<kx>0.142857</kx>
