@@ -56,6 +56,8 @@ class ofApp : public ofBaseApp{
     
         ofLight light;
         ofMaterial material;
+    
+        ofFbo fbo2;
 
 		void keyPressed(int key);
 		void keyReleased(int key);

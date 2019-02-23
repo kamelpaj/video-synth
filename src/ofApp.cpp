@@ -75,6 +75,11 @@ void ofApp::setup(){
     
     // Sphere
     sphere.set(250, 20);
+    fbo2.allocate( ofGetWidth(), ofGetHeight(), GL_RGB );
+    float w = fbo2.getWidth();
+    float h = fbo2.getHeight();
+    sphere.mapTexCoords(0, h, w, 0);
+    sphere.rotate(180, 0, 1, 0);
     sphere.setGlobalPosition( ofGetWidth()/2, ofGetHeight()/2, 0 );
 }
 
@@ -129,6 +134,7 @@ void ofApp::draw() {
     fbo.end();
     ofSetColor( 255 );
     
+    fbo2.begin();
     // Draw shader.
     if ( kenabled ) {
         shader.begin();
@@ -143,6 +149,7 @@ void ofApp::draw() {
     fbo.draw( 0, 0, ofGetWidth(), ofGetHeight() );
     
     if ( kenabled ) shader.end();
+    fbo2.end();
     
     draw3d();
     
@@ -187,7 +194,7 @@ void ofApp::draw2d(){
 
 //--------------------------------------------------------------
 void ofApp::draw3d() {
-    
+    fbo2.getTextureReference().bind();
     light.setPosition( ofGetWidth()/2, ofGetHeight()/2, 600);
     light.enable();
     material.begin();
@@ -209,6 +216,7 @@ void ofApp::draw3d() {
     material.end();
     light.disable();
     ofDisableLighting();
+    fbo2.getTextureReference().unbind();
 }
 
 //--------------------------------------------------------------

@@ -12,7 +12,7 @@
 		<shiftY>-663.265</shiftY>
 		<rotate>73.4694</rotate>
 		<size>10.4207, 9.90004</size>
-		<color>74, 0, 104, 0</color>
+		<color>74, 0, 104, 49</color>
 		<filled>0</filled>
 		<type>0</type>
 	</Primitive>
@@ -21,8 +21,8 @@
 	<twistY>-27.3</twistY>
 	<pinchY>0.16</pinchY>
 	<Mixer>
-		<image>0</image>
-		<video>0</video>
+		<image>89.7704</image>
+		<video>249.796</video>
 		<camera>0</camera>
 		<kenabled>1</kenabled>
 		<ksectors>7</ksectors>
