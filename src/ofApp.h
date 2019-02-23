@@ -53,6 +53,9 @@ class ofApp : public ofBaseApp{
         ofSpherePrimitive sphere;
     
         ofEasyCam cam;
+    
+        ofLight light;
+        ofMaterial material;
 
 		void keyPressed(int key);
 		void keyReleased(int key);

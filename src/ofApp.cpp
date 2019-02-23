@@ -187,10 +187,28 @@ void ofApp::draw2d(){
 
 //--------------------------------------------------------------
 void ofApp::draw3d() {
+    
+    light.setPosition( ofGetWidth()/2, ofGetHeight()/2, 600);
+    light.enable();
+    material.begin();
+    ofEnableDepthTest();
+    
+    float time = ofGetElapsedTimef();
+    float longitude = 10 * time;
+    float latitude = 10 * sin(time*0.8);
+    float radius = 600 + 50*sin(time*0.4);
+    
+    cam.orbit( longitude, latitude, radius, ofPoint(0, 0, 0) );
+    
     cam.begin();
     ofSetColor( ofColor::white );
-    sphere.drawWireframe();
+    sphere.draw();
     cam.end();
+    
+    ofDisableDepthTest();
+    material.end();
+    light.disable();
+    ofDisableLighting();
 }
 
 //--------------------------------------------------------------
@@ -228,7 +246,8 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    if ( showGui && x < 250 ) cam.disableMouseInput();
+    else cam.enableMouseInput();
 }
 
 //--------------------------------------------------------------

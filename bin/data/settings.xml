@@ -6,25 +6,25 @@
 	<Global>
 		<Scale>0.571429</Scale>
 		<Rotate>-178.163</Rotate>
-		<Background>14.3112</Background>
+		<Background>0</Background>
 	</Global>
 	<Primitive>
 		<shiftY>-663.265</shiftY>
 		<rotate>73.4694</rotate>
 		<size>10.4207, 9.90004</size>
-		<color>74, 0, 104, 147</color>
+		<color>74, 0, 104, 0</color>
 		<filled>0</filled>
 		<type>0</type>
 	</Primitive>
 	<countY>8</countY>
 	<stepY>19</stepY>
 	<twistY>-27.3</twistY>
-	<pinchY>0.225</pinchY>
+	<pinchY>0.16</pinchY>
 	<Mixer>
 		<image>0</image>
 		<video>0</video>
-		<camera>106.684</camera>
-		<kenabled>0</kenabled>
+		<camera>0</camera>
+		<kenabled>1</kenabled>
 		<ksectors>7</ksectors>
 		<kangle>-126.735</kangle>
 		<kx>0.142857</kx>
